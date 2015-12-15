@@ -1,45 +1,45 @@
-# Excel Micro TypeScript Style Guide
+# Promob TypeScript Style Guide
 
-*A mostly reasonable approach to TypeScript based off of [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)*
+*Style Guide baseado no [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)*
 
-## Table of Contents
+## Conteúdos
 
-  1. [Types](#types)
-  1. [References](#references)
-  1. [Objects](#objects)
+  1. [Tipos](#tipos)
+  1. [Referências](#referências)
+  1. [Objetos](#objetos)
   1. [Arrays](#arrays)
   1. [Destructuring](#destructuring)
   1. [Strings](#strings)
-  1. [Functions](#functions)
-  1. [Arrow Functions](#arrow-functions)
-  1. [Constructors](#constructors)
-  1. [Modules](#modules)
-  1. [Iterators and Generators](#iterators-and-generators)
-  1. [Properties](#properties)
-  1. [Variables](#variables)
+  1. [Funções](#funções)
+  1. [Arrow Functions (Lambdas)](#arrow-functions)
+  1. [Construtores](#construtores)
+  1. [Módulos](#módulos)
+  1. [Iteradores e Geradores](#iteradores-e-geradores)
+  1. [Propriedades](#propriedades)
+  1. [Variáveis](#variáveis)
   1. [Hoisting](#hoisting)
-  1. [Comparison Operators & Equality](#comparison-operators--equality)
-  1. [Blocks](#blocks)
-  1. [Comments](#comments)
+  1. [Operadores](#operadores)
+  1. [Blocos](#blocos)
+  1. [Comentários](#comentários)
   1. [Whitespace](#whitespace)
-  1. [Commas](#commas)
-  1. [Semicolons](#semicolons)
-  1. [Type Casting & Coercion](#type-casting--coercion)
-  1. [Naming Conventions](#naming-conventions)
-  1. [Accessors](#accessors)
+  1. [Vírgulas](#vírgulas)
+  1. [Ponto e vírgula](#ponto-e-vírgula)
+  1. [Casting](#casting)
+  1. [Nomes](#nomes)
+  1. [Acessores](#acessores)
   1. [Events](#events)
   1. [jQuery](#jquery)
-  1. [Type Annotations](#type-annotations)
+  1. [Anotações de Tipo](#anotações-de-tipo)
   1. [Interfaces](#interfaces)
-  1. [Organization](#organization)
-  1. [ECMAScript 5 Compatibility](#ecmascript-5-compatibility)
-  1. [ECMAScript 6 Styles](#ecmascript-6-styles)
-  1. [Typescript 1.5 Styles](#typescript-1.5-styles)
+  1. [Organização](#organização)
+  1. [Compatibilidade com ECMAScript 5](#compatibilidade-com-ecmascript-5)
+  1. [ECMAScript 6](#ecmascript-6)
+  1. [Typescript 1.5](#typescript-15)
   1. [License](#license)
 
-## Types
+## Tipos
 
-  - [1.1](#1.1) <a name='1.1'></a> **Primitives**: When you access a primitive type you work directly on its value.
+  - [1.1](#1.1) <a name='1.1'></a> **Primitivo**: A manipulação de um tipo primitivo é feita diretamente no seu valor.
 
     + `string`
     + `number`
@@ -55,7 +55,7 @@
 
     console.log(foo, bar); // => 1, 9
     ```
-  - [1.2](#1.2) <a name='1.2'></a> **Complex**: When you access a complex type you work on a reference to its value.
+  - [1.2](#1.2) <a name='1.2'></a> **Complexo**: A manipulação de um tipo complexo é feito por uma referência para o seu valor.
 
     + `object`
     + `array`
@@ -70,30 +70,30 @@
     console.log(foo[0], bar[0]); // => 9, 9
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
-## References
+## Referências
 
-  - [2.1](#2.1) <a name='2.1'></a> Use `const` for all of your references; avoid using `var`.
+  - [2.1](#2.1) <a name='2.1'></a> Use `const` para todas as suas referências; evite usar `var`.
 
-  > Why? This ensures that you can't reassign your references (mutation), which can lead to bugs and difficult to comprehend code.
+  > Isso garante que você não vá reatribuir suas referências (mutação), o que pode levar a bugs e código de difícil compreensão.
 
     ```javascript
-    // bad
+    // ruim
     var a = 1;
     var b = 2;
 
-    // good
+    // bom
     const a = 1;
     const b = 2;
     ```
 
-  - [2.2](#2.2) <a name='2.2'></a> If you must mutate references, use `let` instead of `var`.
+  - [2.2](#2.2) <a name='2.2'></a> Se as referências necessitam ser alteradas, use `let` ao invés `var`.
 
-  > Why? `let` is block-scoped rather than function-scoped like `var`.
+  > `let` possui escopo de bloco (block-scoped) ao invés do escopo de função (function-scoped) que `var` possui.
 
     ```javascript
-    // bad
+    // ruim
     var count = 1;
     if (true) {
 
@@ -101,7 +101,7 @@
 
     }
 
-    // good, use the let.
+    // bom, usando let
     let count = 1;
     if (true) {
 
@@ -110,10 +110,10 @@
     }
     ```
 
-  - [2.3](#2.3) <a name='2.3'></a> Note that both `let` and `const` are block-scoped.
+  - [2.3](#2.3) <a name='2.3'></a>  `let` e `const` possuem escopo de block (block-scoped).
 
     ```javascript
-    // const and let only exist in the blocks they are defined in.
+    // const e let existem apenas nos blocos em que foram definidos
     {
       let a = 1;
       const b = 1;
@@ -122,76 +122,76 @@
     console.log(b); // ReferenceError
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
-## Objects
+## Objetos
 
-  - [3.1](#3.1) <a name='3.1'></a> Use the literal syntax for object creation.
+  - [3.1](#3.1) <a name='3.1'></a> Utilize a sintaxe literal para criar um objeto
 
     ```javascript
-    // bad
+    // ruim
     const item = new Object();
 
-    // good
+    // bom
     const item = {};
     ```
 
-  - [3.2](#3.2) <a name='3.2'></a> Don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61).
+  - [3.2](#3.2) <a name='3.2'></a> Não utilize [palavras reservadas](http://es5.github.io/#x7.6.1) como nome de atributos. Garante a compatibilidade com versões antigas do IE.
 
     ```javascript
-    // bad
+    // ruim
     const superman = {
       default: { clark: 'kent' },
       private: true,
     };
 
-    // good
+    // bom
     const superman = {
       defaults: { clark: 'kent' },
       hidden: true,
     };
     ```
 
-  - [3.3](#3.3) <a name='3.3'></a> Use readable synonyms in place of reserved words.
+  - [3.3](#3.3) <a name='3.3'></a> Utilize sinônimos legíveis no lugar de palavras reservadas.
 
     ```javascript
-    // bad
+    // ruim
     const superman = {
       class: 'alien',
     };
 
-    // bad
+    // ruim
     const superman = {
       klass: 'alien',
     };
 
-    // good
+    // bom
     const superman = {
       type: 'alien',
     };
     ```
 
   <a name="es6-computed-properties"></a>
-  - [3.4](#3.4) <a name='3.4'></a> Use computed property names when creating objects with dynamic property names.
+  - [3.4](#3.4) <a name='3.4'></a> Utilize propriedades computadas quando criar objetos com nome dinâmico de propriedade.
 
-  > Why? They allow you to define all the properties of an object in one place.
+  > Permite que você defina todas as propridades de um objeto em apenas um lugar.
 
     ```javascript
 
     const getKey = function(k) {
 
-      return `a key named ${k}`;
+      return `um atributo chamado ${k}`;
 
     }
 
-    // bad
+    // ruim
     const obj = {
       id: 5,
       name: 'San Francisco',
     };
     obj[getKey('enabled')] = true;
 
-    // good
+    // bom
     const obj = {
       id: 5,
       name: 'San Francisco',
@@ -200,10 +200,10 @@
     ```
 
   <a name="es6-object-shorthand"></a>
-  - [3.5](#3.5) <a name='3.5'></a> Use arrow functions for object methods instead of shorthand properties or an anonymous function.
+  - [3.5](#3.5) <a name='3.5'></a> Utilize lambdas (arrow functions) para objetos com métodos ao invés de propriedades ou funções anônimas.
 
     ```javascript
-    // bad
+    // ruim
     const atom = {
       value: 1,
       addValue: function (value) {
@@ -211,7 +211,7 @@
       },
     };
 
-    // bad
+    // ruim
     const atom = {
       value: 1,
       addValue(value) {
@@ -219,7 +219,7 @@
       },
     };
 
-    // good
+    // bom
     const atom = {
       value: 1,
       addValue: (value) => atom.value + value
@@ -227,9 +227,9 @@
     ```
 
   <a name="es6-object-concise"></a>
-  - [3.6](#3.6) <a name='3.6'></a> Use property value shorthand.
+  - [3.6](#3.6) <a name='3.6'></a> Utilize a forma reduzida de atribuição de valor.
 
-  > Why? It is shorter to write and descriptive.
+  > Maneira mais sucinta e descritiva.
 
     ```javascript
     const lukeSkywalker = 'Luke Skywalker';
@@ -245,15 +245,15 @@
     };
     ```
 
-  - [3.7](#3.7) <a name='3.7'></a> Group your shorthand properties at the beginning of your object declaration.
+  - [3.7](#3.7) <a name='3.7'></a> Agrupe as atribuições de forma reduzida no começo da declaração do objeto.
 
-  > Why? It's easier to tell which properties are using the shorthand.
+  >  Facilita o entendimento das propriedades atribuídas de forma reduzida.
 
     ```javascript
     const anakinSkywalker = 'Anakin Skywalker';
     const lukeSkywalker = 'Luke Skywalker';
 
-    // bad
+    // ruim
     const obj = {
       episodeOne: 1,
       twoJedisWalkIntoACantina: 2,
@@ -263,7 +263,7 @@
       anakinSkywalker,
     };
 
-    // good
+    // bom
     const obj = {
       lukeSkywalker,
       anakinSkywalker,
@@ -274,38 +274,38 @@
     };
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 ## Arrays
 
-  - [4.1](#4.1) <a name='4.1'></a> Use the literal syntax for array creation.
+  - [4.1](#4.1) <a name='4.1'></a> Utilize a sintaxe literal para criar arrays.
 
     ```javascript
-    // bad
+    // ruim
     const items = new Array();
 
-    // good
+    // bom
     const items = [];
     ```
 
-  - [4.2](#4.2) <a name='4.2'></a> Use Array#push instead of direct assignment to add items to an array.
+  - [4.2](#4.2) <a name='4.2'></a> Utilize Array#push ao invés de atribuição direta para adicionar itens ao array.
 
     ```javascript
     const someStack = [];
 
 
-    // bad
+    // ruim
     someStack[someStack.length] = 'abracadabra';
 
-    // good
+    // bom
     someStack.push('abracadabra');
     ```
 
   <a name="es6-array-spreads"></a>
-  - [4.3](#4.3) <a name='4.3'></a> Use array spreads `...` to copy arrays.
+  - [4.3](#4.3) <a name='4.3'></a> Utilize array spreads `...` para copiar arrays.
 
     ```javascript
-    // bad
+    // ruim
     const len = items.length;
     const itemsCopy = [];
     let i;
@@ -314,26 +314,26 @@
       itemsCopy[i] = items[i];
     }
 
-    // good
+    // bom
     const itemsCopy = [...items];
     ```
-  - [4.4](#4.4) <a name='4.4'></a> To convert an array-like object to an array, use Array#from.
+  - [4.4](#4.4) <a name='4.4'></a> Para converter um objeto array-like para um array, utilize Array#from.
 
     ```javascript
     const foo = document.querySelectorAll('.foo');
     const nodes = Array.from(foo);
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 ## Destructuring
 
-  - [5.1](#5.1) <a name='5.1'></a> Use object destructuring when accessing and using multiple properties of an object.
+  - [5.1](#5.1) <a name='5.1'></a> Utilize object destructuring quando é necessário acessar e utilizar múltiplas propriedades de um objeto.
 
-  > Why? Destructuring saves you from creating temporary references for those properties.
+  > Com destructuring é desnecessário criar referências temporárias para utilizar as propriedades do objeto.
 
     ```javascript
-    // bad
+    // ruim
     const getFullName = function(user) {
 
       const firstName = user.firstName;
@@ -343,7 +343,7 @@
 
     }
 
-    // good
+    // bom
     const getFullName = function(obj) {
 
       const { firstName, lastName } = obj;
@@ -351,7 +351,7 @@
 
     }
 
-    // best
+    // muito bom
     const getFullName = function({ firstName, lastName }) {
 
       return `${firstName} ${lastName}`;
@@ -359,131 +359,130 @@
     }
     ```
 
-  - [5.2](#5.2) <a name='5.2'></a> Use array destructuring.
+  - [5.2](#5.2) <a name='5.2'></a> Utilize array destructuring.
 
     ```javascript
     const arr = [1, 2, 3, 4];
 
-    // bad
+    // ruim
     const first = arr[0];
     const second = arr[1];
 
-    // good
+    // bom
     const [first, second] = arr;
     ```
 
-  - [5.3](#5.3) <a name='5.3'></a> Use object destructuring for multiple return values, not array destructuring.
+  - [5.3](#5.3) <a name='5.3'></a> Utilize object destructuring para múltiplos valores de retorno, não array destructuring.
 
-  > Why? You can add new properties over time or change the order of things without breaking call sites.
+  > Você pode adicionar novas propriedades sem quebrar as funções que utilizam o método.
 
     ```javascript
-    // bad
+    // ruim
     const processInput = function(input) {
-      // then a miracle occurs
       return [left, right, top, bottom];
 
     }
 
-    // the caller needs to think about the order of return data
+    // o caller precisa pensar sobre a ordem dos valores dentro do array
     const [left, __, top] = processInput(input);
 
-    // good
+    // bom
     const processInput = function(input) {
-      // then a miracle occurs
       return { left, right, top, bottom };
 
     }
 
-    // the caller selects only the data they need
+    // o caller seleciona apenas os atributos necessários
     const { left, right } = processInput(input);
     ```
 
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 ## Strings
 
-  - [6.1](#6.1) <a name='6.1'></a> Use single quotes `''` for strings.
+  - [6.1](#6.1) <a name='6.1'></a> Aspas simples `''` para strings.
 
     ```javascript
-    // bad
+    // ruim
     const name = "Capt. Janeway";
 
-    // good
+    // bom
     const name = 'Capt. Janeway';
     ```
 
-  - [6.2](#6.2) <a name='6.2'></a> Strings longer than 80 characters should be written across multiple lines using string concatenation.
-  - [6.3](#6.3) <a name='6.3'></a> Note: If overused, long strings with concatenation could impact performance. [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
+  - [6.2](#6.2) <a name='6.2'></a> Strings mais longas que 120 caracteres devem ser escritas em mútiplas linhas.
+  - [6.3](#6.3) <a name='6.3'></a> Nota: Concatenação de strings longas pode causar problemas de performance. [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
 
     ```javascript
-    // bad
+    // ruim
     const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
 
-    // bad
+    // ruim
     const errorMessage = 'This is a super long error that was thrown because \
     of Batman. When you stop to think about how Batman had anything to do \
     with this, you would get nowhere \
     fast.';
 
-    // good
+    // bom
     const errorMessage = 'This is a super long error that was thrown because ' +
       'of Batman. When you stop to think about how Batman had anything to do ' +
       'with this, you would get nowhere fast.';
     ```
 
   <a name="es6-template-literals"></a>
-  - [6.4](#6.4) <a name='6.4'></a> When programmatically building up strings, use template strings instead of concatenation.
+  - [6.4](#6.4) <a name='6.4'></a> Quando construindo strings programaticamente, utilize templates.
 
-  > Why? Template strings give you a readable, concise syntax with proper newlines and string interpolation features.
+  > Templates são mais legíveis, possuem sintaxe concisa e  interpolação.
 
     ```javascript
-    // bad
+    // ruim
     const sayHi = function(name) {
 
-      return 'How are you, ' + name + '?';
+      return 'Olá ' + name + '.';
 
     }
 
-    // bad
+    // ruim
     const sayHi = function(name) {
 
-      return ['How are you, ', name, '?'].join();
+      return ['Olá ', name, '.'].join();
 
     }
 
-    // good
+    // bom
     const sayHi = function(name) {
 
-      return `How are you, ${name}?`;
+      return `Olá ${name}.`;
 
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Functions
+## Funções
 
-  - [7.1](#7.1) <a name='7.1'></a> Use function expressions instead of function declarations.
+  - [7.1](#7.1) <a name='7.1'></a> Declare funções ao invés de criar expressões
 
-  > Why? Badly placed Function Declarations are misleading and there are few (if any) situations where you can’t use a Function Expression assigned to a variable instead. See [function-declarations-vs-function-expressions](https://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/).
+  > Declarações são nomeadas e são mais fáceis de identificar no call stack.
 
     ```javascript
-    // bad
-    function foo() {
-    }
-
-    // good
+    
+    // ruim
     const foo = function() {
     };
 
-    // good
+    // ruim
     const foo = () => {
     };
+    
+    // bom
+    function foo() {
+    }
     ```
 
-  - [7.2](#7.2) <a name='7.2'></a> Function expressions:
+  - [7.2](#7.2) <a name='7.2'></a> Expressões:
 
     ```javascript
     // immediately-invoked function expression (IIFE)
@@ -492,11 +491,11 @@
     })();
     ```
 
-  - [7.3](#7.3) <a name='7.3'></a> Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears.
-  - [7.4](#7.4) <a name='7.4'></a> **Note:** ECMA-262 defines a `block` as a list of statements. A function declaration is not a statement. [Read ECMA-262's note on this issue](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97).
+  - [7.3](#7.3) <a name='7.3'></a> Nunca declare a função em um bloco que não seja de função (if, while, etc). Ao invés, atribua a função a uma variável. Browsers interpretam diferentemente esse comportamento.
+  - [7.4](#7.4) <a name='7.4'></a> **Nota:** ECMA-262 define um `block` como uma lista de comandos. Uma declaração de função não é um comando. [Nota ECMA-262](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97).
 
     ```javascript
-    // bad
+    // ruim
     if (currentUser) {
 
       const test = function() {
@@ -507,7 +506,7 @@
 
     }
 
-    // good
+    // bom
     let test;
     if (currentUser) {
 
@@ -520,27 +519,27 @@
     }
     ```
 
-  - [7.5](#7.5) <a name='7.5'></a> Never name a parameter `arguments`. This will take precedence over the `arguments` object that is given to every function scope.
+  - [7.5](#7.5) <a name='7.5'></a> Nunca nomeie um parametro `arguments`. Isso terá precedência em cima do `arguments` que é dado para cada escopo de função.
 
     ```javascript
-    // bad
+    // ruim
     const nope = function(name, options, arguments) {
-      // ...stuff...
+      // comandos
     }
 
-    // good
+    // bom
     const yup = function(name, options, args) {
-      // ...stuff...
+      // comandos
     }
     ```
 
   <a name="es6-rest"></a>
-  - [7.6](#7.6) <a name='7.6'></a> Never use `arguments`, opt to use rest syntax `...` instead.
+  - [7.6](#7.6) <a name='7.6'></a> Nunca utilize `arguments`, escolha a sintaxe rest  `...`.
 
-  > Why? `...` is explicit about which arguments you want pulled. Plus rest arguments are a real Array and not Array-like like `arguments`.
+  > `...` é explicito quanto quais argumentos você deseja utilizar. Argumentos rest estão em um Array, e não em um array-like object como o `arguments`.
 
     ```javascript
-    // bad
+    // ruim
     const concatenateAll = function() {
 
       const args = Array.prototype.slice.call(arguments);
@@ -548,7 +547,7 @@
 
     }
 
-    // good
+    // bom
     const concatenateAll = function(...args) {
 
       return args.join('');
@@ -557,19 +556,18 @@
     ```
 
   <a name="es6-default-parameters"></a>
-  - [7.7](#7.7) <a name='7.7'></a> Use default parameter syntax rather than mutating function arguments.
+  - [7.7](#7.7) <a name='7.7'></a> Utilize a sintaxe de parâmetro default ao invés de alterar argumentos da função.
 
     ```javascript
-    // really bad
+    // muito ruim
     const handleThings = function(opts) {
-      // No! We shouldn't mutate function arguments.
-      // Double bad: if opts is falsy it'll be set to an object which may
-      // be what you want but it can introduce subtle bugs.
+      // não devemos alterar argumentos de função.
+      // se opts é falso será setado para um objeto que talvez introduza bugs sutis
       opts = opts || {};
       // ...
     }
 
-    // still bad
+    // ruim
     const handleThings = function(opts) {
 
       if (opts === void 0) {
@@ -580,19 +578,16 @@
       // ...
     }
 
-    // good
+    // bom
     const handleThings = function(opts = {}) {
       // ...
     }
     ```
 
-  - [7.8](#7.8) <a name='7.8'></a> Avoid side effects with default parameters
-
-  > Why? They are confusing to reason about.
+  - [7.8](#7.8) <a name='7.8'></a> Use parâmetros default com cuidado.
 
   ```javascript
   var b = 1;
-  // bad
   const count = function(a = b++) {
 
     console.log(a);
@@ -605,62 +600,60 @@
   ```
 
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 ## Arrow Functions
 
-  - [8.1](#8.1) <a name='8.1'></a> When you must use function expressions (as when passing an anonymous function), use arrow function notation.
+  - [8.1](#8.1) <a name='8.1'></a> Quando function expressions são necessárias, como por exemplo passando uma função anônima como parametro, utilize a sintaxe de arrow.
 
-  > Why? It creates a version of the function that executes in the context of `this`, which is usually what you want, and is a more concise syntax.
-
-  > Why not? If you have a fairly complicated function, you might move that logic out into its own function declaration.
+  > Se a função for razoávelmente complexa, talvez seja melhor mover essa lógica para uma declaração.
 
     ```javascript
-    // bad
+    // ruim
     [1, 2, 3].map(function (x) {
 
       return x * x;
 
     });
 
-    // good
+    // bom
     [1, 2, 3].map((x) => {
 
       return x * x;
 
     });
 
-    // good
+    // bom
     [1, 2, 3].map((x) => x * x;);
     ```
 
-  - [8.2](#8.2) <a name='8.2'></a> If the function body fits on one line and there is only a single argument, feel free to omit the braces and parentheses, and use the implicit return. Otherwise, add the parentheses, braces, and use a `return` statement.
+  - [8.2](#8.2) <a name='8.2'></a> Se o corpo da função tiver o tamanho de uma linha e apenas um argumento, é dispensável o uso de parênteses e chaves, e pode ser utilizado o return implícito. Se não, utilize as chaves, parentes e `return`
 
-  > Why? Syntactic sugar. It reads well when multiple functions are chained together.
+  > Syntactic sugar. Muito legível.
 
-  > Why not? If you plan on returning an object.
+  > Não utilize se a função retorna um objeto complexo.
 
     ```javascript
-    // good
+    // bom
     [1, 2, 3].map(x => x * x);
 
-    // good
+    // bom
     [1, 2, 3].reduce((total, n) => {
       return total + n;
     }, 0);
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Constructors
+## Construtores
 
-  - [9.1](#9.1) <a name='9.1'></a> Always use `class`. Avoid manipulating `prototype` directly.
+  - [9.1](#9.1) <a name='9.1'></a> Sempre utilize `class`. Evite manipular o `prototype` diretamente.
 
-  > Why? `class` syntax is more concise and easier to reason about.
+  > `class` é mais concisa e é mais familiar para C# devs.
 
     ```javascript
-    // bad
+    // ruim
     function Queue(contents = []) {
 
       this._queue = [...contents];
@@ -675,7 +668,7 @@
     }
 
 
-    // good
+    // bom
     class Queue {
 
       constructor(contents = []) {
@@ -695,12 +688,12 @@
     }
     ```
 
-  - [9.2](#9.2) <a name='9.2'></a> Use `extends` for inheritance.
+  - [9.2](#9.2) <a name='9.2'></a> Utilize `extends` para herança.
 
-  > Why? It is a built-in way to inherit prototype functionality without breaking `instanceof`.
+  > É uma maneira simples de herdar a funcionalidade do prototype sem quebrar `instanceof`.
 
     ```javascript
-    // bad
+    // ruim
     const inherits = require('inherits');
     function PeekableQueue(contents) {
 
@@ -714,7 +707,7 @@
 
     }
 
-    // good
+    // bom
     class PeekableQueue extends Queue {
 
       peek() {
@@ -726,10 +719,10 @@
     }
     ```
 
-  - [9.3](#9.3) <a name='9.3'></a> Methods can return `this` to help with method chaining.
+  - [9.3](#9.3) <a name='9.3'></a> Métodos podem retornar `this` para implementar method chaining.
 
     ```javascript
-    // bad
+    // ruim
     Jedi.prototype.jump = function() {
 
       this.jumping = true;
@@ -747,7 +740,7 @@
     luke.jump(); // => true
     luke.setHeight(20); // => undefined
 
-    // good
+    // bom
     class Jedi {
 
       jump() {
@@ -773,7 +766,7 @@
     ```
 
 
-  - [9.4](#9.4) <a name='9.4'></a> It's okay to write a custom toString() method, just make sure it works successfully and causes no side effects.
+  - [9.4](#9.4) <a name='9.4'></a> É aconselhado reescrever o método toString() se necessário
 
     ```javascript
     class Jedi {
@@ -799,106 +792,64 @@
     }
     ```
 
-<a name="ts-classes"></a>
-  - [9.5](#9.5) <a name='9.5'></a> Typescript classes placeholder.
-
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Modules
+## Módulos
 
-  - [10.1](#10.1) <a name='10.1'></a> Use modules (`import`/`export`) over a non-standard module system.
-
-  > Why? Modules are the future, let's start using the future now.
+  - [10.1](#10.1) <a name='10.1'></a> Utilize (`import`/`export`) como padrão.
 
     ```javascript
-    // bad
+    // ruim
     const AirbnbStyleGuide = require('./AirbnbStyleGuide');
     module.exports = AirbnbStyleGuide.es6;
 
-    // ok
+    // bom
     import AirbnbStyleGuide from './AirbnbStyleGuide';
     export default AirbnbStyleGuide.es6;
 
-    // best
+    // muito bom - angularjs2 syntax
     import { es6 } from './AirbnbStyleGuide';
     export default es6;
     ```
 
-  - [10.2](#10.2) <a name='10.2'></a>And do not export directly from an import.
+  - [10.2](#10.2) <a name='10.2'></a>Não `export` diretamente de um `import`. 
 
-  > Why? Although the one-liner is concise, having one clear way to import and one clear way to export makes things consistent.
+  > Ter uma maneira de importar módulos e uma maneira para exportar deixa o código mais consistente.
 
     ```javascript
-    // bad
+    // ruim
     // filename es6.js
     export { es6 as default } from './airbnbStyleGuide';
 
-    // good
+    // bom
     // filename es6.js
     import { es6 } from './AirbnbStyleGuide';
     export default es6;
     ```
 
-  - [10.3](#10.3) <a name='10.3'></a>Use TypeScript module import for non-ES6 libraries with type definitions. Check [DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped) for available type definition files.
-
-  > Why? This provides type information from external modules when available
-
+  - [10.3](#10.3) <a name='10.3'></a>Não utilize wildcards
+  
     ```javascript
-    // bad
-    /// <reference path="lodash/lodash.d.ts" />
-    var lodash = require('lodash')
-
-    // good
-    /// <reference path="lodash/lodash.d.ts" />
-    import lodash = require('lodash')
+    // ruim
+    import * as PromobERPCommon from './common';
+    
+    //bom
+    import PromobERPCommon from './common;'
     ```
 
-  - [10.4](#10.4) <a name='10.4'></a>Group module imports by type and then alphabetic by variable name. Follow these rules for ordering your module imports:
-    + External libraries with type definitions
-    + Internal typescript modules with wildcard imports
-    + Internal typescript modules without wildcard imports
-    + External libraries without type definitions
+**[⬆ voltar ao topo](#conteúdos)**
 
+## Iteradores e Geradores
 
-  > Why? This makes your import section consistent across all modules.
+  - [11.1](#11.1) <a name='11.1'></a> Evite iteradores. Prefira utilizar funções como `map()`, `reduce()`, `forEach()` ao invés de `for-of`.
 
-    ```javascript
-    // bad
-    /// <reference path="../typings/tsd.d.ts" />
-    import * as Api from './api';
-    import _ = require('lodash');
-    var Distillery = require('distillery-js');
-    import Partner from './partner';
-    import * as Util from './util';
-    import Q = require('Q');
-    var request = require('request');
-    import Customer from './customer';
-
-    // good
-    /// <reference path="../typings/tsd.d.ts" />
-    import _ = require('lodash');
-    import Q = require('Q');
-    import * as Api from './api';
-    import * as Util from './util';
-    import Customer from './customer';
-    import Partner from './partner';
-    var Distillery = require('distillery-js');
-    var request = require('request');
-    ```
-
-**[⬆ back to top](#table-of-contents)**
-
-## Iterators and Generators
-
-  - [11.1](#11.1) <a name='11.1'></a> Don't use iterators. Prefer JavaScript's higher-order functions like `map()` and `reduce()` instead of loops like `for-of`.
-
-  > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side-effects.
+  > Isso fortalece a regra de referências imutáveis.
 
     ```javascript
     const numbers = [1, 2, 3, 4, 5];
 
-    // bad
+    // ruim
     let sum = 0;
     for (let num of numbers) {
 
@@ -908,26 +859,24 @@
 
     sum === 15;
 
-    // good
+    // bom
     let sum = 0;
     numbers.forEach((num) => sum += num);
     sum === 15;
 
-    // best (use the functional force)
+    // muito bom
     const sum = numbers.reduce((total, num) => total + num, 0);
     sum === 15;
     ```
 
-  - [11.2](#11.2) <a name='11.2'></a> Don't use generators for now.
+  - [11.2](#11.2) <a name='11.2'></a> Não utilize geradores por enquanto.
 
-  > Why? They don't transpile well to ES5.
-
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Properties
+## Propriedades
 
-  - [12.1](#12.1) <a name='12.1'></a> Use dot notation when accessing properties.
+  - [12.1](#12.1) <a name='12.1'></a> Use notação de ponto para acessar propriedades.
 
     ```javascript
     const luke = {
@@ -935,14 +884,14 @@
       age: 28,
     };
 
-    // bad
+    // ruim
     const isJedi = luke['jedi'];
 
-    // good
+    // bom
     const isJedi = luke.jedi;
     ```
 
-  - [12.2](#12.2) <a name='12.2'></a> Use subscript notation `[]` when accessing properties with a variable.
+  - [12.2](#12.2) <a name='12.2'></a> Utilize a sintaxe de indexação `[]` em casos raros. Prefira criar uma interface e utilizar a notação de ponto quando possível.
 
     ```javascript
     const luke = {
@@ -959,61 +908,61 @@
     const isJedi = getProp('jedi');
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Variables
+## Variáveis
 
-  - [13.1](#13.1) <a name='13.1'></a> Always use `const` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that.
+  - [13.1](#13.1) <a name='13.1'></a> Sempre utilize `const`/`let` para declarar variáveis, dependendendo da necessidade. Prefira `const`.
 
     ```javascript
-    // bad
+    // ruim
     superPower = new SuperPower();
 
-    // good
+    // bom
     const superPower = new SuperPower();
     ```
 
-  - [13.2](#13.2) <a name='13.2'></a> Use one `const` declaration per variable.
+  - [13.2](#13.2) <a name='13.2'></a> Utilize uma declaração `const`/`let` por variável.
 
-    > Why? It's easier to add new variable declarations this way, and you never have to worry about swapping out a `;` for a `,` or introducing punctuation-only diffs.
+    > É mais fácil de ler e adicionar variáveis.
 
     ```javascript
-    // bad
+    // ruim
     const items = getItems(),
         goSportsTeam = true,
         dragonball = 'z';
 
-    // bad
-    // (compare to above, and try to spot the mistake)
+    // ruim
+    // (encontre o erro :) )
     const items = getItems(),
         goSportsTeam = true;
         dragonball = 'z';
 
-    // good
+    // bom
     const items = getItems();
     const goSportsTeam = true;
     const dragonball = 'z';
     ```
 
-  - [13.3](#13.3) <a name='13.3'></a> Group all your `const`s and then group all your `let`s.
+  - [13.3](#13.3) <a name='13.3'></a> Agrupe todos seus `const`s e todos seus `let`s.
 
-  > Why? This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.
+  > Ajuda a organizar o código.
 
     ```javascript
-    // bad
+    // ruim
     let i, len, dragonball,
         items = getItems(),
         goSportsTeam = true;
 
-    // bad
+    // ruim
     let i;
     const items = getItems();
     let dragonball;
     const goSportsTeam = true;
     let len;
 
-    // good
+    // bom
     const goSportsTeam = true;
     const items = getItems();
     let dragonball;
@@ -1021,12 +970,12 @@
     let length;
     ```
 
-  - [13.4](#13.4) <a name='13.4'></a> Assign variables where you need them, but place them in a reasonable place.
+  - [13.4](#13.4) <a name='13.4'></a> Atribua os valores quando necessário, mas declare as variáveis em lugares sensatos.
 
-  > Why? `let` and `const` are block scoped and not function scoped.
+  > Lembre-se: `let` e `const` possuem escopo de bloco (block-scoped) e não escopo de função (function-scoped).
 
     ```javascript
-    // good
+    // bom
     function() {
 
       test();
@@ -1046,7 +995,7 @@
 
     }
 
-    // bad - unnessary function call
+    // ruim - chamada de função desnecessária
     function(hasName) {
 
       const name = getName();
@@ -1063,7 +1012,7 @@
 
     }
 
-    // good
+    // bom
     function(hasName) {
 
       if (!hasName) {
@@ -1080,26 +1029,22 @@
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
 ## Hoisting
 
-  - [14.1](#14.1) <a name='14.1'></a> `var` declarations get hoisted to the top of their scope, their assignment does not. `const` and `let` declarations are blessed with a new concept called [Temporal Dead Zones (TDZ)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let). It's important to know why [typeof is no longer safe](http://es-discourse.com/t/why-typeof-is-no-longer-safe/15).
+  - [14.1](#14.1) <a name='14.1'></a> Hoisting é o comportamento padrão do javascript de mover declarações para o topo. Declarações `var` sofrem com isso, mas a atribuição de um valor para uma variável `var` não sofre. Declarações `const` e `let` possuem um conceito chamado [Temporal Dead Zones (TDZ)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let). É importante saber que [typeof não é seguro](http://es-discourse.com/t/why-typeof-is-no-longer-safe/15).
 
     ```javascript
-    // we know this wouldn't work (assuming there
-    // is no notDefined global variable)
+    // isso não funcionaria se notDefined não tivesse sido declarada
     function example() {
 
       console.log(notDefined); // => throws a ReferenceError
 
     }
 
-    // creating a variable declaration after you
-    // reference the variable will work due to
-    // variable hoisting. Note: the assignment
-    // value of `true` is not hoisted.
+    // isso funcionaria devido ao hoisting, mas o valor da váriavel não estaria setado
     function example() {
 
       console.log(declaredButNotAssigned); // => undefined
@@ -1107,9 +1052,7 @@
 
     }
 
-    // The interpreter is hoisting the variable
-    // declaration to the top of the scope,
-    // which means our example could be rewritten as:
+    // o interpretador está aplicando o hoisting na variável, o exemplo acima poderia ser reescrito dessa maneira:
     function example() {
 
       let declaredButNotAssigned;
@@ -1118,7 +1061,7 @@
 
     }
 
-    // using const and let
+    // utilizando const e let
     function example() {
 
       console.log(declaredButNotAssigned); // => throws a ReferenceError
@@ -1128,7 +1071,7 @@
     }
     ```
 
-  - [14.2](#14.2) <a name='14.2'></a> Anonymous function expressions hoist their variable name, but not the function assignment.
+  - [14.2](#14.2) <a name='14.2'></a> Funções anônimas sofrem "hoist" da própria variável, mas não a atribuição do corpo da função.
 
     ```javascript
     function example() {
@@ -1146,7 +1089,7 @@
     }
     ```
 
-  - [14.3](#14.3) <a name='14.3'></a> Named function expressions hoist the variable name, not the function name or the function body.
+  - [14.3](#14.3) <a name='14.3'></a> Funções nomeadas que são atribuídas a variáveis sofrem "hoist" do nome da variável, mas não do nome da função nem da implementação da função.
 
     ```javascript
     function example() {
@@ -1165,8 +1108,7 @@
 
     }
 
-    // the same is true when the function name
-    // is the same as the variable name.
+    // o mesmo vale se o nome da função é igual ao nome da variável
     function example() {
 
       console.log(named); // => undefined
@@ -1182,7 +1124,7 @@
     }
     ```
 
-  - [14.4](#14.4) <a name='14.4'></a> Function declarations hoist their name and the function body.
+  - [14.4](#14.4) <a name='14.4'></a> Declarações de funções sofrem "hoist" no nome da função e na sua implementação.
 
     ```javascript
     function example() {
@@ -1198,94 +1140,89 @@
     }
     ```
 
-  - For more information refer to [JavaScript Scoping & Hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting) by [Ben Cherry](http://www.adequatelygood.com/).
+  - Mais Informações: [JavaScript Scoping & Hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting) by [Ben Cherry](http://www.adequatelygood.com/).
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Comparison Operators & Equality
+## Operadores
 
-  - [15.1](#15.1) <a name='15.1'></a> Use `===` and `!==` over `==` and `!=`.
-  - [15.2](#15.2) <a name='15.2'></a> Conditional statements such as the `if` statement evaulate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
+  - [15.1](#15.1) <a name='15.1'></a> SEMPRE utilize `===` e `!==` ao invés de `==` e `!=`.
+  - [15.2](#15.2) <a name='15.2'></a> Comandos condicionais como o `if` avaliam a expressão utilizando coercion com o método abstrato `ToBoolean` e seguem as seguintes regras:
 
-    + **Objects** evaluate to **true**
-    + **Undefined** evaluates to **false**
-    + **Null** evaluates to **false**
-    + **Booleans** evaluate to **the value of the boolean**
-    + **Numbers** evaluate to **false** if **+0, -0, or NaN**, otherwise **true**
-    + **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
+    + **Objects** são **true**
+    + **Undefined** é **false**
+    + **Null** é **false**
+    + **Booleans** recebem **o valor do booleano**
+    + **Numbers** são **false** se **+0, -0, ou NaN**, senão são **true**
+    + **Strings** são **false** se é uma string vazia `''`, senão são  **true**
 
     ```javascript
     if ([0]) {
       // true
-      // An array is an object, objects evaluate to true
+      // Array é um objeto, objeto é true
     }
     ```
 
-  - [15.3](#15.3) <a name='15.3'></a> Use shortcuts.
+  - [15.3](#15.3) <a name='15.3'></a> Utilize atalhos.
 
     ```javascript
-    // bad
+    // ruim
     if (name !== '') {
       // ...stuff...
     }
 
-    // good
+    // bom
     if (name) {
       // ...stuff...
     }
 
-    // bad
+    // ruim
     if (collection.length > 0) {
       // ...stuff...
     }
 
-    // good
+    // bom
     if (collection.length) {
       // ...stuff...
     }
     ```
 
-  - [15.4](#15.4) <a name='15.4'></a> For more information see [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
+  - [15.4](#15.4) <a name='15.4'></a> Para mais informações: [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Blocks
+## Blocos
 
-  - [16.1](#16.1) <a name='16.1'></a> Use braces with multi-line blocks or omit braces for two line blocks.
+  - [16.1](#16.1) <a name='16.1'></a> Utilize chaves para blocos multi-linhas. Pode-se omitir as chaves em blocos de uma linha.
 
     ```javascript
-    // bad
+    // ruim
     if (test) return false;
 
-    // ok
+    // bom
     if (test)
       return false;
 
-    // good
+    // muito bom
     if (test) {
-
       return false;
-
     }
 
-    // bad
+    // ruim
     function() { return false; }
 
-    // good
+    // bom
     function() {
-
       return false;
-
     }
     ```
 
-  - [16.2](#16.2) <a name='16.2'></a> If you're using multi-line blocks with `if` and `else`, put `else` on the same line as your
-    `if` block's closing brace.
+  - [16.2](#16.2) <a name='16.2'></a> Se você está utilizando blocos multi-linhas com `if` e `else`, coloque `else` na mesma linha do fechamento do bloco do `if`.
 
     ```javascript
-    // bad
+    // ruim
     if (test) {
       thing1();
       thing2();
@@ -1294,7 +1231,7 @@
       thing3();
     }
 
-    // good
+    // bom
     if (test) {
       thing1();
       thing2();
@@ -1303,42 +1240,39 @@
     }
     ```
 
-    - [16.3](#16.3) <a name='16.3'></a> If you're using multi-line blocks with `if` and `else`, do not omit curly braces.
+    - [16.3](#16.3) <a name='16.3'></a> Não omita as chaves em blocos multi-linha.
 
-    > Why? Omitting curly braces in multi-line blocks can easily cause unexpected behavior.
-
-      ```javascript
-      // bad
-      if (test)
-        thing1();
-        thing2();
-      else
-        thing3();
-
-      // good
-      if (test) {
-        thing1();
-        thing2();
-      } else {
-        thing3();
-      }
-      ```
-
-
-**[⬆ back to top](#table-of-contents)**
-
-
-## Comments
-
-  - [17.1](#17.1) <a name='17.1'></a> Use `/** ... */` for multi-line comments. Include a description, specify types and values for all parameters and return values.
+    > Omitir as chaves nesse caso facilita bugs.
 
     ```javascript
-    // bad
-    // make() returns a new element
-    // based on the passed in tag name
+    // ruim
+    if (test)
+      thing1();
+      thing2();
+    else
+      thing3();
+
+    // bom
+    if (test) {
+      thing1();
+      thing2();
+    } else {
+      thing3();
+    }
+    ```
+
+
+**[⬆ voltar ao topo](#conteúdos)**
+
+
+## Comentários
+
+  - [17.1](#17.1) <a name='17.1'></a> Utilize `/** ... */` para comentários multi-linha. Inclua uma descrição descrição e tente não ser redundante. Se o código está claro o suficiente para outra pessoa, reavalie se comentários são realmente necessários.
+    ```javascript
+    // ruim
+    // make() retorna um novo elemento
+    // baseado na tag
     //
-    // @param {String} tag
-    // @return {Element} element
     const make = function(tag) {
 
       // ...stuff...
@@ -1347,13 +1281,10 @@
 
     }
 
-    // good
+    // bom
     /**
-     * make() returns a new element
-     * based on the passed in tag name
-     *
-     * @param {String} tag
-     * @return {Element} element
+     * make() retorna um novo elemento
+     * baseado na tag
      */
     const make = function(tag) {
 
@@ -1364,17 +1295,17 @@
     }
     ```
 
-  - [17.2](#17.2) <a name='17.2'></a> Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment.
+  - [17.2](#17.2) <a name='17.2'></a> Utilize `//` para comentários de uma linha. Comente na linha imediatamente acima a linha do código, e deixe uma linha branco entre o comando anterior e o comentário.
 
     ```javascript
-    // bad
+    // ruim
     const active = true;  // is current tab
 
-    // good
+    // bom
     // is current tab
     const active = true;
 
-    // bad
+    // ruim
     const getType = function() {
 
       console.log('fetching type...');
@@ -1385,7 +1316,7 @@
 
     }
 
-    // good
+    // bom
     const getType = function() {
 
       console.log('fetching type...');
@@ -1398,9 +1329,9 @@
     }
     ```
 
-  - [17.3](#17.3) <a name='17.3'></a> Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME -- need to figure this out` or `TODO -- need to implement`.
+  - [17.3](#17.3) <a name='17.3'></a> Utilize prefixos `FIXME` ou `TODO` quando necessário.
 
-  - [17.4](#17.4) <a name='17.4'></a> Use `// FIXME:` to annotate problems.
+  - [17.4](#17.4) <a name='17.4'></a> Utilize `//FIXME:` para descrever problemas.
 
     ```javascript
     class Calculator {
@@ -1413,7 +1344,7 @@
     }
     ```
 
-  - [17.5](#17.5) <a name='17.5'></a> Use `// TODO:` to annotate solutions to problems.
+  - [17.5](#17.5) <a name='17.5'></a> Utilize `//TODO:` para descrever soluções.
 
     ```javascript
     class Calculator {
@@ -1426,91 +1357,91 @@
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
 ## Whitespace
 
-  - [18.1](#18.1) <a name='18.1'></a> Use soft tabs set to 2 spaces.
+  - [18.1](#18.1) <a name='18.1'></a> Utilize tabs como 4 espaços - padrão VS.
 
     ```javascript
-    // bad
+    // ruim
     function() {
 
-    ∙∙∙∙const name;
+    ∙∙const name;
 
     }
 
-    // bad
+    // ruim
     function() {
 
     ∙const name;
 
     }
 
-    // good
+    // bom
     function() {
 
-    ∙∙const name;
+    ∙∙∙∙const name;
 
     }
     ```
 
-  - [18.2](#18.2) <a name='18.2'></a> Place 1 space before the leading brace.
+  - [18.2](#18.2) <a name='18.2'></a> Coloque um espaço antes da chave inicial.
 
     ```javascript
-    // bad
+    // ruim
     const test = function(){
 
       console.log('test');
 
     }
 
-    // good
+    // bom
     const test = function() {
 
       console.log('test');
 
     }
 
-    // bad
+    // ruim
     dog.set('attr',{
       age: '1 year',
       breed: 'Bernese Mountain Dog',
     });
 
-    // good
+    // bom
     dog.set('attr', {
       age: '1 year',
       breed: 'Bernese Mountain Dog',
     });
     ```
 
-  - [18.3](#18.3) <a name='18.3'></a> Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space before the argument list in function calls and declarations.
+  - [18.3](#18.3) <a name='18.3'></a> Coloque um espaço antes de abrir parênteses em comandos de controle (`if`, `while` etc.). Não coloque espaços antes da lista de argumentos de uma função.
 
     ```javascript
-    // bad
+    // ruim
     if(isJedi) {
 
       fight ();
 
     }
 
-    // good
+    // bom
     if (isJedi) {
 
       fight();
 
     }
 
-    // bad
+    // ruim
     const fight = function () {
 
       console.log ('Swooosh!');
 
     }
 
-    // good
+    // bom
     const fight = function() {
 
       console.log('Swooosh!');
@@ -1518,17 +1449,17 @@
     }
     ```
 
-  - [18.4](#18.4) <a name='18.4'></a> Set off operators with spaces.
+  - [18.4](#18.4) <a name='18.4'></a> Utilize espaço para separar operadores.
 
     ```javascript
-    // bad
+    // ruim
     const x=y+5;
 
-    // good
+    // bom
     const x = y + 5;
     ```
 
-  - [18.5](#18.5) <a name='18.5'></a> End files with a single newline character.
+  - [18.5](#18.5) <a name='18.5'></a> Acabe arquivos com um caracter de nova linha.
 
     ```javascript
     // bad
@@ -1552,67 +1483,66 @@
     })(this);↵
     ```
 
-  - [18.5](#18.5) <a name='18.5'></a> Use indentation when making long method chains. Use a leading dot, which
-    emphasizes that the line is a method call, not a new statement.
-
+  - [18.5](#18.5) <a name='18.5'></a> Idente quando estiver fazendo method chaining de vários métodos. Utilize o ponto no começo da linha para demonstrar que é um método e não um comando novo.
+  
     ```javascript
-    // bad
+    // ruim
     $('#items').find('.selected').highlight().end().find('.open').updateCount();
 
-    // bad
+    // ruim
     $('#items').
       find('.selected').
-        highlight().
-        end().
+      highlight().
+      end().
       find('.open').
-        updateCount();
+      updateCount();
 
-    // good
+    // bom
     $('#items')
       .find('.selected')
-        .highlight()
-        .end()
+      .highlight()
+      .end()
       .find('.open')
-        .updateCount();
+      .updateCount();
 
-    // bad
+    // ruim
     const leds = stage.selectAll('.led').data(data).enter().append('svg:svg').class('led', true)
         .attr('width', (radius + margin) * 2).append('svg:g')
         .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
         .call(tron.led);
 
-    // good
+    // bom
     const leds = stage.selectAll('.led')
         .data(data)
-      .enter().append('svg:svg')
+        .enter().append('svg:svg')
         .classed('led', true)
         .attr('width', (radius + margin) * 2)
-      .append('svg:g')
+        .append('svg:g')
         .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
         .call(tron.led);
     ```
 
-  - [18.6](#18.6) <a name='18.6'></a> Leave a blank line after the opening of a block and before the closing of a block
+  - [18.6](#18.6) <a name='18.6'></a> Insira uma linha em branco após abrir o bloco e antes de fechar ele.
 
   ```javascript
-  // bad
+  // ruim
   if (foo) {
     return bar;
   }
 
-  // good
+  // obm
   if (foo) {
 
     return bar;
 
   }
 
-  // bad
+  // ruim
   const baz = function(foo) {
     return bar;
   }
 
-  // good
+  // bom
   const baz = function(foo) {
 
     return bar;
@@ -1620,10 +1550,10 @@
   }
   ```
 
-  - [18.7](#18.7) <a name='18.7'></a> Leave a blank line after blocks and before the next statement.
+  - [18.7](#18.7) <a name='18.7'></a> Insira uma linha em branco após o final do bloco
 
     ```javascript
-    // bad
+    // ruim
     if (foo) {
 
       return bar;
@@ -1631,7 +1561,7 @@
     }
     return baz;
 
-    // good
+    // bom
     if (foo) {
 
       return bar;
@@ -1640,7 +1570,7 @@
 
     return baz;
 
-    // bad
+    // ruim
     const obj = {
       foo() {
       },
@@ -1649,7 +1579,7 @@
     };
     return obj;
 
-    // good
+    // bom
     const obj = {
       foo() {
       },
@@ -1662,28 +1592,28 @@
     ```
 
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
-## Commas
+## Vírgulas
 
-  - [19.1](#19.1) <a name='19.1'></a> Leading commas: **Nope.**
+  - [19.1](#19.1) <a name='19.1'></a> Vírgulas no ínicio: **Nope.**
 
     ```javascript
-    // bad
+    // ruim
     const story = [
         once
       , upon
       , aTime
     ];
 
-    // good
+    // bom
     const story = [
       once,
       upon,
       aTime,
     ];
 
-    // bad
+    // ruim
     const hero = {
         firstName: 'Ada'
       , lastName: 'Lovelace'
@@ -1691,7 +1621,7 @@
       , superPower: 'computers'
     };
 
-    // good
+    // bom
     const hero = {
       firstName: 'Ada',
       lastName: 'Lovelace',
@@ -1700,27 +1630,23 @@
     };
     ```
 
-  - [19.2](#19.2) <a name='19.2'></a> Additional trailing comma: **Yup.**
+  - [19.2](#19.2) <a name='19.2'></a> DISCUSS - Vírgula sobrando: **Nope.**
 
-  > Why? This leads to cleaner git diffs. Also, transpilers like Babel will remove the additional trailing comma in the transpiled code which means you don't have to worry about the [trailing comma problem](es5/README.md#commas) in legacy browsers.
+  > Typescript não elimina a vírgula que sobra.
 
     ```javascript
-    // bad - git diff without trailing comma
+    // ruim
     const hero = {
-         firstName: 'Florence',
-    -    lastName: 'Nightingale'
-    +    lastName: 'Nightingale',
-    +    inventorOf: ['coxcomb graph', 'mordern nursing']
-    }
+      firstName: 'Dana',
+      lastName: 'Scully',
+    };
 
-    // good - git diff with trailing comma
-    const hero = {
-         firstName: 'Florence',
-         lastName: 'Nightingale',
-    +    inventorOf: ['coxcomb chart', 'mordern nursing'],
-    }
-
-    // bad
+    const heroes = [
+      'Batman',
+      'Superman',
+    ];
+    
+    // bom
     const hero = {
       firstName: 'Dana',
       lastName: 'Scully'
@@ -1731,27 +1657,17 @@
       'Superman'
     ];
 
-    // good
-    const hero = {
-      firstName: 'Dana',
-      lastName: 'Scully',
-    };
-
-    const heroes = [
-      'Batman',
-      'Superman',
-    ];
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Semicolons
+## Ponto e vírgula
 
-  - [20.1](#20.1) <a name='20.1'></a> **Yup.**
+  - [20.1](#20.1) <a name='20.1'></a> **Sempre.**
 
     ```javascript
-    // bad
+    // ruim
     (function() {
 
       const name = 'Skywalker'
@@ -1759,7 +1675,7 @@
 
     })()
 
-    // good
+    // bom
     (() => {
 
       const name = 'Skywalker';
@@ -1767,7 +1683,7 @@
 
     })();
 
-    // good (guards against the function becoming an argument when two files with IIFEs are concatenated)
+    // bom - closures não se tornam argumentos no caso de concatenação
     ;(() => {
 
       const name = 'Skywalker';
@@ -1778,12 +1694,12 @@
 
     [Read more](http://stackoverflow.com/a/7365214/1712802).
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Type Casting & Coercion
+## Casting
 
-  - [21.1](#21.1) <a name='21.1'></a> Perform type coercion at the beginning of the statement.
+  - [21.1](#21.1) <a name='21.1'></a> Faça o cast no início  do comando.
   - [21.2](#21.2) <a name='21.2'></a> Strings:
 
     ```javascript
@@ -1796,44 +1712,43 @@
     const totalScore = String(this.reviewScore);
     ```
 
-  - [21.3](#21.3) <a name='21.3'></a> Use `parseInt` for Numbers and always with a radix for type casting.
+  - [21.3](#21.3) <a name='21.3'></a> Utilize `parseInt` para Numbers e sempre utilize um radix para casting.
 
     ```javascript
     const inputValue = '4';
 
-    // bad
+    // ruim
     const val = new Number(inputValue);
 
-    // bad
+    // ruim
     const val = +inputValue;
 
-    // bad
+    // ruim
     const val = inputValue >> 0;
 
-    // bad
+    // ruim
     const val = parseInt(inputValue);
 
-    // good
+    // bom
     const val = Number(inputValue);
 
-    // good
+    // bom
     const val = parseInt(inputValue, 10);
     ```
 
-  - [21.4](#21.4) <a name='21.4'></a> If for whatever reason you are doing something wild and `parseInt` is your bottleneck and need to use Bitshift for [performance reasons](http://jsperf.com/coercion-vs-casting/3), leave a comment explaining why and what you're doing.
+  - [21.4](#21.4) <a name='21.4'></a> `parseInt` pode virar um bottleneck. Utilize Bitshift caso tenha se tornado um bottleneck por [razões de performance](http://jsperf.com/coercion-vs-casting/3), comente porque e o que você está fazendo.
 
     ```javascript
     // good
     /**
-     * parseInt was the reason my code was slow.
-     * Bitshifting the String to coerce it to a
-     * Number made it a lot faster.
+     * parseInt estava deixando o código lento
+     * Bitshifting a string para transformar-lá num Number deixou muito mais rápido
      */
     const val = inputValue >> 0;
     ```
 
-  - [21.5](#21.5) <a name='21.5'></a> **Note:** Be careful when using bitshift operations. Numbers are represented as [64-bit values](http://es5.github.io/#x4.3.19), but Bitshift operations always return a 32-bit integer ([source](http://es5.github.io/#x11.7)). Bitshift can lead to unexpected behavior for integer values larger than 32 bits. [Discussion](https://github.com/airbnb/javascript/issues/109). Largest signed 32-bit Int is 2,147,483,647:
-
+  - [21.5](#21.5) <a name='21.5'></a> **Note:** Cuidado ao utilizar bitshift. Numeros são representados por [64 bits](http://es5.github.io/#x4.3.19), porém operações bitshifts sempre [retornam 32 bits](http://es5.github.io/#x11.7). O Maior inteiro de 32 bits é 2.147.483.647.
+  
     ```javascript
     2147483647 >> 0 //=> 2147483647
     2147483648 >> 0 //=> -2147483648
@@ -1845,52 +1760,58 @@
     ```javascript
     const age = 0;
 
-    // bad
+    // ruim
     const hasAge = new Boolean(age);
 
-    // good
+    // bom
     const hasAge = Boolean(age);
 
-    // good
+    // bom
     const hasAge = !!age;
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Naming Conventions
+## Nomes
 
-  - [22.1](#22.1) <a name='22.1'></a> Avoid single letter names. Be descriptive with your naming.
+  - [22.1](#22.1) <a name='22.1'></a> Seja sempre descritivo com o nome das suas funções.
 
     ```javascript
-    // bad
+    // ruim
     function q() {
       // ...stuff...
     }
 
-    // good
+    // bom
     function query() {
+      // ..stuff..
+    }
+    
+    
+    // muito bom
+    function queryStuffOnDataBase() {
       // ..stuff..
     }
     ```
 
-  - [22.2](#22.2) <a name='22.2'></a> Use camelCase when naming objects, functions, and instances.
+  - [22.2](#22.2) <a name='22.2'></a> Utilize camelCase para nomear objetos, métodos, funções, campos privados e instâncias.
 
     ```javascript
-    // bad
+    // ruim
     const OBJEcttsssss = {};
     const this_is_my_object = {};
     const c = function() {}
 
-    // good
+    // bom
     const thisIsMyObject = {};
     const thisIsMyFunction = function() {}
     ```
 
-  - [22.3](#22.3) <a name='22.3'></a> Use PascalCase when naming constructors, classes, modules, or interfaces.
+  - [22.3](#22.3) <a name='22.3'></a> Utilize PascalCase para nomear classes, campos públicos, modulos ou interfaces - essas sempre começando por I.
 
     ```javascript
-    // bad
+    // ruim
     function user(options) {
 
       this.name = options.name;
@@ -1901,7 +1822,7 @@
       name: 'nope',
     });
 
-    // good
+    // bom
     module AperatureScience {
 
       class User {
@@ -1921,223 +1842,53 @@
     });
     ```
 
-  - [22.4](#22.4) <a name='22.4'></a> Use snake_case when naming object properties.
+**[⬆ voltar ao topo](#conteúdos)**
+
+
+## Acessores 
+
+  - [23.1](#23.1) <a name='23.1'></a> DISCUSS Utilize a sintaxe de `get()` e `set()` do Typescript 
 
     ```javascript
-    // bad
-    const panda = {
-      firstName: 'Mr.',
-      LastName: 'Panda'
-    }
-
-    // good
-    const panda = {
-      first_name: 'Mr.',
-      Last_name: 'Panda'
+    class Foo{
+       private bar : number;
+       
+       get Bar() : number {
+         return this.bar;
+       }
+       
+       set Bar(value : number) {
+         this.bar = value;
+       }
     }
     ```
 
-  - [22.5](#22.5) <a name='22.5'></a> Use a leading underscore `_` when naming private properties.
-
-    ```javascript
-    // bad
-    this.__firstName__ = 'Panda';
-    this.firstName_ = 'Panda';
-
-    // good
-    this._firstName = 'Panda';
-    ```
-
-  - [22.6](#22.6) <a name='22.6'></a> Don't save references to `this`. Use arrow functions or Function#bind.
-
-    ```javascript
-    // bad
-    function foo() {
-
-      const self = this;
-      return function() {
-
-        console.log(self);
-
-      };
-
-    }
-
-    // bad
-    function foo() {
-
-      const that = this;
-      return function() {
-
-        console.log(that);
-
-      };
-
-    }
-
-    // good
-    function foo() {
-
-      return () => {
-        console.log(this);
-      };
-
-    }
-    ```
-
-  - [22.7](#22.7) <a name='22.7'></a> If your file exports a single class, your filename should be exactly the name of the class.
-    ```javascript
-    // file contents
-    class CheckBox {
-      // ...
-    }
-    export default CheckBox;
-
-    // in some other file
-    // bad
-    import CheckBox from './checkBox';
-
-    // bad
-    import CheckBox from './check_box';
-
-    // good
-    import CheckBox from './CheckBox';
-    ```
-
-  - [22.8](#22.8) <a name='22.8'></a> Use camelCase when you export-default a function. Your filename should be identical to your function's name.
-
-    ```javascript
-    function makeStyleGuide() {
-    }
-
-    export default makeStyleGuide;
-    ```
-
-  - [22.9](#22.9) <a name='22.9'></a> Use PascalCase when you export a singleton / function library / bare object.
-
-    ```javascript
-    const AirbnbStyleGuide = {
-      es6: {
-      }
-    };
-
-    export default AirbnbStyleGuide;
-    ```
-
-
-**[⬆ back to top](#table-of-contents)**
-
-
-## Accessors
-
-  - [23.1](#23.1) <a name='23.1'></a> Accessor functions for properties are not required.
-  - [23.2](#23.2) <a name='23.2'></a> If you do make accessor functions use getVal() and setVal('hello').
-
-    ```javascript
-    // bad
-    dragon.age();
-
-    // good
-    dragon.getAge();
-
-    // bad
-    dragon.age(25);
-
-    // good
-    dragon.setAge(25);
-    ```
-
-  - [23.3](#23.3) <a name='23.3'></a> If the property is a boolean, use isVal() or hasVal().
-
-    ```javascript
-    // bad
-    if (!dragon.age()) {
-      return false;
-    }
-
-    // good
-    if (!dragon.hasAge()) {
-      return false;
-    }
-    ```
-
-  - [23.4](#23.4) <a name='23.4'></a> It's okay to create get() and set() functions, but be consistent.
-
-    ```javascript
-    class Jedi {
-
-      constructor(options = {}) {
-
-        const lightsaber = options.lightsaber || 'blue';
-        this.set('lightsaber', lightsaber);
-
-      }
-
-      set(key, val) {
-
-        this[key] = val;
-
-      }
-
-      get(key) {
-
-        return this[key];
-
-      }
-
-    }
-    ```
-
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
 ## Events
 
-  - [24.1](#24.1) <a name='24.1'></a> When attaching data payloads to events (whether DOM events or something more proprietary like Backbone events), pass a hash instead of a raw value. This allows a subsequent contributor to add more data to the event payload without finding and updating every handler for the event. For example, instead of:
+  - [24.1](#24.1) <a name='24.1'></a> Placeholder de AngularJS events
 
-    ```javascript
-    // bad
-    $(this).trigger('listingUpdated', listing.id);
-
-    ...
-
-    $(this).on('listingUpdated', function(e, listingId) {
-      // do something with listingId
-    });
-    ```
-
-    prefer:
-
-    ```javascript
-    // good
-    $(this).trigger('listingUpdated', { listingId : listing.id });
-
-    ...
-
-    $(this).on('listingUpdated', function(e, data) {
-      // do something with data.listingId
-    });
-    ```
-
-  **[⬆ back to top](#table-of-contents)**
+  **[⬆ voltar ao topo](#conteúdos)**
 
 
 ## jQuery
 
-  - [25.1](#25.1) <a name='25.1'></a> Prefix jQuery object variables with a `$`.
+  - [25.1](#25.1) <a name='25.1'></a> Utilize o prefixo `$`.
 
     ```javascript
-    // bad
+    // ruim
     const sidebar = $('.sidebar');
 
-    // good
+    // bom
     const $sidebar = $('.sidebar');
     ```
 
-  - [25.2](#25.2) <a name='25.2'></a> Cache jQuery lookups.
+  - [25.2](#25.2) <a name='25.2'></a> Faça cache de buscas do jQuery.
 
     ```javascript
-    // bad
+    // ruim
     function setSidebar() {
 
       $('.sidebar').hide();
@@ -2150,7 +1901,7 @@
 
     }
 
-    // good
+    // bom
     function setSidebar() {
 
       const $sidebar = $('.sidebar');
@@ -2165,36 +1916,36 @@
     }
     ```
 
-  - [25.3](#25.3) <a name='25.3'></a> For DOM queries use Cascading `$('.sidebar ul')` or parent > child `$('.sidebar > ul')`. [jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
-  - [25.4](#25.4) <a name='25.4'></a> Use `find` with scoped jQuery object queries.
+  - [25.3](#25.3) <a name='25.3'></a> Para queries no DOM utilize cascading  `$('.sidebar ul')` ou parent > child `$('.sidebar > ul')`. [jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
+  - [25.4](#25.4) <a name='25.4'></a> Utilize `find` com queries jQuery DISCUSS
 
     ```javascript
-    // bad
+    // ruim
     $('ul', '.sidebar').hide();
 
-    // bad
+    // ruim
     $('.sidebar').find('ul').hide();
 
-    // good
+    // bom
     $('.sidebar ul').hide();
 
-    // good
+    // bom
     $('.sidebar > ul').hide();
 
-    // good
+    // bom
     $sidebar.find('ul').hide();
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Type Annotations
+## Anotações de Tipo
 
 <a name="ts-type-annotations"></a>
-  - [26.1](#26.1) <a name='26.1'></a> Type annotations placeholder.
+  - [26.1](#26.1) <a name='26.1'></a> Placeholder de anotações de tipos.
 
 <a name="ts-generics"></a>
-  - [26.2](#26.2) <a name='26.2'></a> Use "T" for the type variable if only one is needed.
+  - [26.2](#26.2) <a name='26.2'></a> Utilize `T` para o tipo da variável.
 
 ```javascript
 function identify<T>(arg: T): T {
@@ -2204,7 +1955,7 @@ function identify<T>(arg: T): T {
 }
 ```
 
-  - [26.3](#26.3) <a name='26.3'></a> If more than one type variable is required, start with letter "T" and name your variable in alphabetical sequence.
+  - [26.3](#26.3) <a name='26.3'></a> Se mais de um tipo é necessário, começe por `T`e siga em ordem alfabética.
 
 ```javascript
 function find<T, U extends Findable>(needle: T, haystack: U): U {
@@ -2214,17 +1965,17 @@ function find<T, U extends Findable>(needle: T, haystack: U): U {
 }
 ```
 
-  - [26.4](#26.4) <a name='26.4'></a> When possible, allow the compiler to infer type of variables.
+  - [26.4](#26.4) <a name='26.4'></a> Quando possível, utilize a inferência de tipos do Typescript.
 
 ```javascript
-// bad
+// ruim
 const output = identify<string>("myString");
 
-// good
+// bom
 const output = identity("myString");
 ```
 
-  - [26.5](#26.5) <a name='26.5'></a> When creating factories using generics, be sure to include the constructor function in the type.
+  - [26.5](#26.5) <a name='26.5'></a> Quando criar factories utilizando generics, não esqueça do construtor.
 
 ```javascript
 function create<t>(thing: {new(): T;}): T {
@@ -2234,86 +1985,34 @@ function create<t>(thing: {new(): T;}): T {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
 ## Interfaces
 
 <a name="ts-interfaces"></a>
-  - [27.1](#27.1) <a name='27.1'></a> Interface placeholder.
+  - [27.1](#27.1) <a name='27.1'></a> Nomeie a interface sempre iniciando pela letra `I`.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## Organization
+## Organização
 
 <a name="ts-modules"></a>
-  - [28.1](#28.1) <a name='28.1'></a> 1 file per logical component, and each file should be divided into logical divisions via modules. 
+  - [28.1](#28.1) <a name='28.1'></a> Placeholder
 
-  ```javascript
-  module Automobile {
-
-    module Honda {
-
-    }
-
-  }
-  ```
-  
-  - [28.2](#28.2) <a name='28.2'></a> Export one main module per file so it can be required by other files.
-
-  ```javascript
-  module Automobile {
-
-    // hidden module, will not be accessible via "require"
-    Honda {
-
-    }
-  
-    // public module, will be accessible via "require"
-    export Ford {
-
-      export function vroom() {
-
-        console.log('vroom!');
-
-      }
-
-    }
-
-  }
-
-  export default Automobile;
-  ```
-
-- [28.3](#28.3) <a name='28.3'></a> Order your code (alphabetically) in the following order within each module:
-   - var
-   - export var
-   - let
-   - export let
-   - const
-   - export const
-   - interface
-   - export interface
-   - function
-   - export function
-   - class
-   - export class
-   - module
-   - export module
-
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 
-## ECMAScript 5 Compatibility
+## Compatibilidade com ECMAScript 5
 
-  - [29.1](#29.1) <a name='29.1'></a> Refer to [Kangax](https://twitter.com/kangax/)'s ES5 [compatibility table](http://kangax.github.com/es5-compat-table/).
+  - [29.1](#29.1) <a name='29.1'></a> Utilize a tabela feita por [Kangax](https://twitter.com/kangax/) da  [tabela de compatibilidade ES5](http://kangax.github.com/es5-compat-table/).
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
-## ECMAScript 6 Styles
+## ECMAScript 6
 
-  - [30.1](#30.1) <a name='30.1'></a> This is a collection of links to the various es6 features.
+  - [30.1](#30.1) <a name='30.1'></a> ES6 Style Features
 
 1. [Arrow Functions](#arrow-functions)
 1. [Classes](#constructors)
@@ -2329,11 +2028,11 @@ function create<t>(thing: {new(): T;}): T {
 1. [Iterators and Generators](#iterators-and-generators)
 1. [Modules](#modules)
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
-## Typescript 1.5 Styles
+## Typescript 1.5
 
-  - [31.1](#31.1) <a name='31.1'></a> This is a collection of links to the various es6 features.
+  - [31.1](#31.1) <a name='31.1'></a> ES6 Typescript Features
 
 1. [Type Annotations](#ts-type-annotations)
 1. [Interfaces](#ts-interfaces)
@@ -2341,7 +2040,7 @@ function create<t>(thing: {new(): T;}): T {
 1. [Modules](#ts-modules)
 1. [Generics](#ts-generics)
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**
 
 ## License
 
@@ -2368,4 +2067,4 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#conteúdos)**

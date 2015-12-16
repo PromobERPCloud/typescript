@@ -76,7 +76,7 @@
 
   - [2.1](#2.1) <a name='2.1'></a> Use `const` para todas as suas referências; evite usar `var`.
 
-  > Isso garante que você não vá reatribuir suas referências (mutação), o que pode levar a bugs e código de difícil compreensão.
+  > Isso garante que você não vá reatribuir suas referências (mutação), o que pode levar a bugs e código de difícil compreensão. Com objeto complexos, o `const` não garante a imutabilidade dos valores dos atributos do objeto.
 
     ```javascript
     // ruim
@@ -110,7 +110,7 @@
     }
     ```
 
-  - [2.3](#2.3) <a name='2.3'></a>  `let` e `const` possuem escopo de block (block-scoped).
+  - [2.3](#2.3) <a name='2.3'></a>  `let` e `const` possuem escopo de block (block-scoped). No Typescript, o compilador faz a verificação e emite um erro em tempo de compilação.
 
     ```javascript
     // const e let existem apenas nos blocos em que foram definidos
@@ -118,8 +118,9 @@
       let a = 1;
       const b = 1;
     }
-    console.log(a); // ReferenceError
-    console.log(b); // ReferenceError
+    console.log(a); // Erro do TSC
+    console.log(b); // Erro do TSC
+    
     ```
 
 **[⬆ voltar ao topo](#conteúdos)**
@@ -234,12 +235,12 @@
     ```javascript
     const lukeSkywalker = 'Luke Skywalker';
 
-    // bad
+    // ruim
     const obj = {
       lukeSkywalker: lukeSkywalker,
     };
 
-    // good
+    // bom
     const obj = {
       lukeSkywalker,
     };
@@ -562,7 +563,7 @@
     // muito ruim
     const handleThings = function(opts) {
       // não devemos alterar argumentos de função.
-      // se opts é falso será setado para um objeto que talvez introduza bugs sutis
+      // se opts é falso será setado para um objeto que talvez introduza bugs
       opts = opts || {};
       // ...
     }
@@ -604,7 +605,7 @@
 
 ## Arrow Functions
 
-  - [8.1](#8.1) <a name='8.1'></a> Quando function expressions são necessárias, como por exemplo passando uma função anônima como parametro, utilize a sintaxe de arrow.
+  - [8.1](#8.1) <a name='8.1'></a> Quando function expressions são necessárias, como por exemplo passando uma função anônima como parâmetro, utilize a sintaxe de arrow.
 
   > Se a função for razoávelmente complexa, talvez seja melhor mover essa lógica para uma declaração.
 
@@ -1040,7 +1041,7 @@
     // isso não funcionaria se notDefined não tivesse sido declarada
     function example() {
 
-      console.log(notDefined); // => throws a ReferenceError
+      console.log(notDefined); // => compilador não encontra a variável
 
     }
 
@@ -1064,8 +1065,8 @@
     // utilizando const e let
     function example() {
 
-      console.log(declaredButNotAssigned); // => throws a ReferenceError
-      console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
+      console.log(declaredButNotAssigned); // => Erro do TSC
+      console.log(typeof declaredButNotAssigned); // => Erro do TSC
       const declaredButNotAssigned = true;
 
     }
@@ -1337,7 +1338,7 @@
     class Calculator {
 
       constructor() {
-        // FIXME: shouldn't use a global here
+        // FIXME: não utilizar variável global 
         total = 0;
       }
 
@@ -1350,7 +1351,7 @@
     class Calculator {
 
       constructor() {
-        // TODO: total should be configurable by an options param
+        // TODO: total deveria ser inserido via parâmetro
         this.total = 0;
       }
 
@@ -1530,7 +1531,7 @@
     return bar;
   }
 
-  // obm
+  // bom
   if (foo) {
 
     return bar;
@@ -1705,10 +1706,10 @@
     ```javascript
     //  => this.reviewScore = 9;
 
-    // bad
+    // ruim
     const totalScore = this.reviewScore + '';
 
-    // good
+    // bom
     const totalScore = String(this.reviewScore);
     ```
 

@@ -201,7 +201,7 @@
     ```
 
   <a name="es6-object-shorthand"></a>
-  - [3.5](#3.5) <a name='3.5'></a> Utilize lambdas (arrow functions) para objetos com métodos ao invés de propriedades ou funções anônimas.
+  - [3.5](#3.5) <a name='3.5'></a> Utilize lambdas (arrow functions) ou object-shorthand methods para objetos com métodos ao invés de propriedades ou funções anônimas.
 
     ```javascript
     // ruim
@@ -212,7 +212,7 @@
       },
     };
 
-    // ruim
+    // bom
     const atom = {
       value: 1,
       addValue(value) {
@@ -599,7 +599,44 @@
   count(3); // 3
   count();  // 3
   ```
-
+  
+  - [7.9](#7.9) <a name='7.9'></a> Sempre coloque parâmetros default por último.
+  
+  ```javascript
+  // ruim
+  function createObj(opts = {}, id){
+    //...
+  }
+  
+  // bom
+  function createObj(id, opts = {}){
+    //...
+  }
+  ``` 
+  
+  - [7.10](#7.10) <a name='7.10'></a> Nunca use o construtor Function para criar uma função.
+  
+  > Isso deixa o código vulnerável ( eval() );
+  
+  ```javascript
+  // ruim
+  let add = new Function('a','b','return a + b');
+  ```
+  
+  - [7.11](#7.11) <a name='7.11'></a> Atenção com o espaçamento.
+  
+  > Consistência é bom, e não se deve adicionar ou remover espaços quando adiciona-se ou altera-se um nome.
+  
+  ```javascript
+  // ruim
+  const f = function(){};
+  const g = function (){};
+  const h = function() {};
+  
+  // bom
+  const x = function () {};
+  const y = function a() {};
+  ```
 
 **[⬆ voltar ao topo](#conteúdos)**
 
@@ -643,7 +680,35 @@
       return total + n;
     }, 0);
     ```
-
+    
+    - [8.3](#8.3) <a name='8.3'></a> Se a expressão se estender por várias linhas, envolva-a com parênteses para melhor legibilidade.
+    
+    > Mostra claramente onde a expressão começa e termina.
+    
+    ```javascript
+    // ruim
+    [1, 2, 3].map(number => 'As time went by, the string containing the ' +
+      `${number} became much longer. So we needed to break it over multiple ` +
+      'lines.'
+    );
+  
+    // bom
+    [1, 2, 3].map(number => (
+      `As time went by, the string containing the ${number} became much ` +
+      'longer. So we needed to break it over multiple lines.'
+    ));
+    ```
+    
+    - [8.4](#8.4) <a = name='8.4"></a> Se a função recebe apenas um argumento, não utilize parênteses.
+    
+    ```javascript
+    // bom
+    [1, 2, 3].map(x => x * x);
+    
+    // bom
+    [1, 2, 3].reduce((y, x) => x + y);
+    ```
+    
 **[⬆ voltar ao topo](#conteúdos)**
 
 

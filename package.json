@@ -1,28 +1,23 @@
 {
-  "name": "airbnb-style",
-  "version": "2.0.0",
-  "description": "A mostly reasonable approach to JavaScript.",
+  "name": "promob-typescript-style",
+  "version": "1.0",
+  "description": "Style Guide baseado no Airbnb JavaScript Style Guide.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "publish-all": "npm publish && cd ./packages/eslint-config-airbnb && npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/airbnb/javascript.git"
+    "url": "https://github.com/PromobERPCloud/typescript.git"
   },
   "keywords": [
     "style guide",
-    "lint",
-    "airbnb",
-    "es6",
-    "es2015",
-    "react",
-    "jsx"
+    "typescript"
   ],
-  "author": "Harrison Shoff <hi@hshoff.com> (https://twitter.com/hshoff)",
+  "author": "Thiago Cândido <thiago.candido@promob.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/airbnb/javascript/issues"
+    "url": "https://github.com/PromobERPCloud/typescript/issues"
   },
-  "homepage": "https://github.com/airbnb/javascript"
+  "homepage": "https://github.com/PromobERPCloud/typescript"
 }
